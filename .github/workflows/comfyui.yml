@@ -1,6 +1,6 @@
 # See: https://github.com/cubeofcube-dev/docker-library
 
-name: Build and push `ComfyUI` docker image
+name: Build and push `comfyui` docker image
 
 on:
   workflow_dispatch:
@@ -8,13 +8,13 @@ on:
     branches:
       - main
     paths:
-      - ComfyUI/**
-      - .github/workflows/ComfyUI.yml
+      - comfyui/**
+      - .github/workflows/comfyui.yml
   pull_request:
     branches:
       - main
     paths:
-      - ComfyUI/**
+      - comfyui/**
 
 jobs:
   build-and-push:
@@ -43,11 +43,11 @@ jobs:
       - name: Build and push docker image
         uses: docker/build-push-action@v6
         with:
-          file: ComfyUI/Dockerfile
+          file: comfyui/Dockerfile
           platforms: linux/amd64
-          context: ComfyUI
+          context: comfyui
           push: ${{ github.ref == 'refs/heads/main' }}
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/ComfyUI:${{ github.sha }}
-            ${{ secrets.DOCKER_USERNAME }}/ComfyUI:${{ env.DATE }}
-            ${{ secrets.DOCKER_USERNAME }}/ComfyUI:latest
+            ${{ secrets.DOCKER_USERNAME }}/comfyui:${{ github.sha }}
+            ${{ secrets.DOCKER_USERNAME }}/comfyui:${{ env.DATE }}
+            ${{ secrets.DOCKER_USERNAME }}/comfyui:latest
